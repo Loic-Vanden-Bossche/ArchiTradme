@@ -11,6 +11,8 @@ group = "esgi.al2.architradme"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
+extra["versionName"] = version
+
 repositories {
     mavenCentral()
 }
@@ -31,6 +33,12 @@ tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "17"
+    }
+}
+
+tasks.register("printVersionName") {
+    doLast {
+        println(project.extra["versionName"])
     }
 }
 
