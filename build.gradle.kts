@@ -15,6 +15,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.getByName<Jar>("jar") {
+    enabled = false
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
