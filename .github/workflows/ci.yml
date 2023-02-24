@@ -19,10 +19,10 @@ jobs:
 
       - name: Read version from file
         id: version
-        run: echo "::set-output name=version::$(gradle -q printVersionName)"
+        run: echo "::set-output name=version::$(gradlew -q printVersionName)"
 
       - name: Build application
-        run: gradle build
+        run: gradlew build
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
