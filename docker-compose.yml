@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: archi-tradme
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
