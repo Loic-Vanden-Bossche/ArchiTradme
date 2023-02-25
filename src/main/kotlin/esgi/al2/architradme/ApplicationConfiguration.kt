@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import
 @Configuration
 @Import(KernelConfiguration::class)
 class ApplicationConfiguration {
+
     @Bean
     fun apiAliveService(): ApiAliveService {
         return ApiAliveService()
