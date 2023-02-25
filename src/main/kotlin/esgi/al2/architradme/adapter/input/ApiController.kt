@@ -10,12 +10,12 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/")
-class ApiAliveController {
+class ApiController {
 
     private var queryBus: QueryBus<ApiAliveQuery>? = null
 
     @Autowired
-    private fun ApiAliveController(queryBus: QueryBus<ApiAliveQuery>) {
+    private fun ApiController(queryBus: QueryBus<ApiAliveQuery>) {
         this.queryBus = queryBus
     }
 
