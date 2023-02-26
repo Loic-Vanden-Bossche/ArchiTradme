@@ -1,0 +1,292 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/consultants/{consultantId}": {
+      "put": {
+        "tags": [
+          "consultant-controller"
+        ],
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "consultantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConsultantRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateConsultantResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consultants": {
+      "post": {
+        "tags": [
+          "consultant-controller"
+        ],
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterConsultantRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterConsultantResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consultants/search": {
+      "get": {
+        "tags": [
+          "consultant-controller"
+        ],
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "skill",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxADR",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "minADR",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchConsultantsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "api-controller"
+        ],
+        "operationId": "getAliveStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiAliveResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UpdateConsultantRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "adr": {
+            "type": "number",
+            "format": "double"
+          },
+          "availability": {
+            "type": "string"
+          },
+          "modalities": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateConsultantResponse": {
+        "type": "object",
+        "properties": {
+          "consultantId": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterConsultantRequest": {
+        "required": [
+          "adr",
+          "email",
+          "firstName",
+          "lastName",
+          "skills"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "adr": {
+            "type": "number",
+            "format": "double"
+          },
+          "availability": {
+            "type": "string"
+          },
+          "modalities": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterConsultantResponse": {
+        "type": "object",
+        "properties": {
+          "consultantId": {
+            "type": "string"
+          }
+        }
+      },
+      "ConsultantResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "adr": {
+            "type": "number",
+            "format": "double"
+          },
+          "availability": {
+            "type": "string"
+          },
+          "modalities": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchConsultantsResponse": {
+        "type": "object",
+        "properties": {
+          "consultants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsultantResponse"
+            }
+          }
+        }
+      },
+      "ApiAliveResponse": {
+        "type": "object",
+        "properties": {
+          "alive": {
+            "type": "boolean"
+          },
+          "responseId": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
