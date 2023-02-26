@@ -32,7 +32,7 @@ class ConsultantController {
         @RequestBody @Valid transferAccountRequest: RegisterConsultantRequest
     ): RegisterConsultantResponse {
         // commandBus?.post()
-        return RegisterConsultantResponse()
+        return RegisterConsultantResponse("test")
     }
 
 }
