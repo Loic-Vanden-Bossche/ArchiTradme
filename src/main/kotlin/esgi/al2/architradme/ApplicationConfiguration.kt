@@ -2,6 +2,7 @@ package esgi.al2.architradme
 
 import esgi.al2.architradme.adapter.output.ConsultantEntityRepository
 import esgi.al2.architradme.adapter.output.ConsultantPersistenceAdapter
+import esgi.al2.architradme.adapter.output.LogNotifications
 import esgi.al2.architradme.application.services.ApiAliveService
 import esgi.al2.kernel.KernelConfiguration
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,6 +25,11 @@ class ApplicationConfiguration {
     @Bean
     fun persistenceAdapter(): ConsultantPersistenceAdapter {
         return ConsultantPersistenceAdapter(consultantEntityRepository)
+    }
+
+    @Bean
+    fun notifications(): LogNotifications {
+        return LogNotifications()
     }
 
 }

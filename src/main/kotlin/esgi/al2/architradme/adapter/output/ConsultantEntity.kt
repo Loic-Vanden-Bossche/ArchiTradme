@@ -1,18 +1,19 @@
 package esgi.al2.architradme.adapter.output
 
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "T_CONSULTANT")
-class ConsultantEntity {
+class ConsultantEntity() {
+    constructor(id: String, competences: List<String>) : this() {
+        this.id = id
+        this.competences = competences
+    }
+
     @Id
     var id: String? = null
 
-    constructor()
-    constructor(id: String?) {
-        this.id = id
-    }
-
+    @ElementCollection
+    @CollectionTable(name="T_CONSULTANT_COMPETENCES", joinColumns=[JoinColumn(name="consultant_id")])
+    var competences: List<String>? = null
 }
