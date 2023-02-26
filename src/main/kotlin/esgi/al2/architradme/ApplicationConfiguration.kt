@@ -4,6 +4,8 @@ import esgi.al2.architradme.adapter.output.ConsultantEntityRepository
 import esgi.al2.architradme.adapter.output.ConsultantPersistenceAdapter
 import esgi.al2.architradme.adapter.output.LogNotifications
 import esgi.al2.architradme.application.services.ApiAliveService
+import esgi.al2.architradme.application.services.ConsultantRegisteredEventHandler
+import esgi.al2.architradme.application.services.RegisterConsultantService
 import esgi.al2.kernel.Event
 import esgi.al2.kernel.EventDispatcher
 import esgi.al2.kernel.KernelConfiguration
@@ -28,6 +30,14 @@ class ApplicationConfiguration {
     }
 
     @Bean
+    fun registerConsultantService(): RegisterConsultantService {
+        return RegisterConsultantService(
+            persistenceAdapter(),
+            eventDispatcher!!
+        )
+    }
+
+    @Bean
     fun persistenceAdapter(): ConsultantPersistenceAdapter {
         return ConsultantPersistenceAdapter(consultantEntityRepository)
     }
@@ -35,6 +45,11 @@ class ApplicationConfiguration {
     @Bean
     fun notifications(): LogNotifications {
         return LogNotifications()
+    }
+
+    @Bean
+    fun accountCreatedEventHandler(): ConsultantRegisteredEventHandler {
+        return ConsultantRegisteredEventHandler(notifications())
     }
 
 }

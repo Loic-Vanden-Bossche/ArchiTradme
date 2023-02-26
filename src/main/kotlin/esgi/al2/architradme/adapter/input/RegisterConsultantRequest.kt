@@ -2,24 +2,11 @@ package esgi.al2.architradme.adapter.input
 
 import jakarta.validation.constraints.NotNull
 
-class RegisterConsultantRequest {
-    @NotNull
-    val firstName: String? = null
-
-    @NotNull
-    val lastName: String? = null
-
-    @NotNull
-    val email: String? = null
-
-    @NotNull
-    val password: String? = null
-
-    @NotNull
-    val skills: List<String>? = null
-
-    @NotNull
-    val adr: String? = null
-
+class RegisterConsultantRequest(
+    @field:NotNull val firstName: String,
+    @field:NotNull val lastName: String,
+    @field:NotNull val email: String,
+    @field:NotNull val skills: List<String>,
+    @field:NotNull val adr: String,
     val disponibility: String? = null
-}
+)

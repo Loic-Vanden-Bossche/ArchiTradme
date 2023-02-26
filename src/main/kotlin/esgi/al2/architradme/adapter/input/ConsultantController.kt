@@ -1,5 +1,6 @@
 package esgi.al2.architradme.adapter.input
 
+import esgi.al2.architradme.application.port.input.RegisterConsultantCommand
 import esgi.al2.kernel.Command
 import esgi.al2.kernel.CommandBus
 import esgi.al2.kernel.Query
@@ -29,10 +30,10 @@ class ConsultantController {
 
     @PostMapping(value = ["/register"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     private fun register(
-        @RequestBody @Valid transferAccountRequest: RegisterConsultantRequest
+        @RequestBody @Valid registerConsultantRequest: RegisterConsultantRequest
     ): RegisterConsultantResponse {
-        // commandBus?.post()
-        return RegisterConsultantResponse("test")
+        val accountId = commandBus?.post<String>(RegisterConsultantCommand(registerConsultantRequest.skills))
+        return RegisterConsultantResponse(accountId ?: "")
     }
 
 }

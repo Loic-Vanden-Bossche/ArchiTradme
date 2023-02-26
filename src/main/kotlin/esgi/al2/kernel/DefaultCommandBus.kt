@@ -21,8 +21,8 @@ internal class DefaultCommandBus<C : Command>(
             throw ApplicationException(violations.toString())
         }
         return try {
-            val commandHandler: CommandHandler<C, R> = registry[command.javaClass] as CommandHandler<C, R>
-            commandHandler.handle(command)
+            val commandHandler: CommandHandler<C, R>? = registry[command.javaClass] as CommandHandler<C, R>?
+            commandHandler?.handle(command) ?: throw ApplicationException(String.format("No handler for %s", command.javaClass))
         } catch (e: Exception) {
             throw ApplicationException(String.format("Can't execute %s", command.name()), e)
         }
