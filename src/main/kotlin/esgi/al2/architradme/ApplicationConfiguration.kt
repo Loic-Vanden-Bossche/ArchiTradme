@@ -49,6 +49,11 @@ class ApplicationConfiguration {
     }
 
     @Bean
+    fun searchConsultantsService(): SearchConsultantsService {
+        return SearchConsultantsService(persistenceAdapter())
+    }
+
+    @Bean
     fun persistenceAdapter(): ConsultantPersistenceAdapter {
         return ConsultantPersistenceAdapter(consultantEntityRepository)
     }

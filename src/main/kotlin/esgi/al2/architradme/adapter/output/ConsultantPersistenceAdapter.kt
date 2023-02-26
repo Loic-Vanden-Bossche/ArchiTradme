@@ -2,6 +2,7 @@ package esgi.al2.architradme.adapter.output
 
 import esgi.al2.architradme.application.port.output.LoadConsultantPort
 import esgi.al2.architradme.application.port.output.RegisterConsultantPort
+import esgi.al2.architradme.application.port.output.SearchConsultantsPort
 import esgi.al2.architradme.application.port.output.UpdateConsultantPort
 import esgi.al2.architradme.domain.Consultant
 import esgi.al2.architradme.domain.ConsultantId
@@ -9,7 +10,7 @@ import java.util.*
 
 class ConsultantPersistenceAdapter(
     private var consultantEntityRepository: ConsultantEntityRepository?
-) : RegisterConsultantPort, UpdateConsultantPort, LoadConsultantPort {
+) : RegisterConsultantPort, UpdateConsultantPort, LoadConsultantPort, SearchConsultantsPort {
 
     override fun nextId(): ConsultantId {
         return ConsultantId.of(UUID.randomUUID())
@@ -47,5 +48,13 @@ class ConsultantPersistenceAdapter(
 
     override fun load(consultantId: ConsultantId): Optional<ConsultantEntity>? {
         return consultantEntityRepository?.findById(consultantId.value())
+    }
+
+    override fun search(
+        skill: String?,
+        maxADR: Double?,
+        minADR: Double?,
+    ): List<ConsultantEntity> {
+        return consultantEntityRepository?.search(skill, maxADR, minADR) ?: emptyList()
     }
 }
