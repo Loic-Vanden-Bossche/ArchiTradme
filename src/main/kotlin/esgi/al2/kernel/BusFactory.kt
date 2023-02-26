@@ -10,6 +10,10 @@ class BusFactory private constructor() {
         fun defaultQueryBus(): QueryBus<Query> {
             return DefaultQueryBus(HashMap(), UseCaseValidator.instance.validator())
         }
+
+        fun defaultCommandBus(): CommandBus<Command> {
+            return DefaultCommandBus(HashMap(), UseCaseValidator.instance.validator())
+        }
     }
 }
 

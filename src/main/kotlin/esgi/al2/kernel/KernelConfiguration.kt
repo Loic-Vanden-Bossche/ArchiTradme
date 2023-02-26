@@ -9,4 +9,9 @@ class KernelConfiguration {
     fun queryBus(): QueryBus<*> {
         return BusFactory.defaultQueryBus()
     }
+
+    @Bean
+    fun commandBus(): CommandBus<*> {
+        return BusFactory.defaultCommandBus()
+    }
 }

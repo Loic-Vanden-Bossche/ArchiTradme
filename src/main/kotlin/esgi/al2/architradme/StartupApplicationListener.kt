@@ -2,23 +2,29 @@ package esgi.al2.architradme;
 
 import esgi.al2.architradme.application.port.input.ApiAliveQuery
 import esgi.al2.architradme.application.services.ApiAliveService
+import esgi.al2.kernel.Command
+import esgi.al2.kernel.CommandBus
 import esgi.al2.kernel.QueryBus
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationListener
+import org.springframework.context.event.ContextRefreshedEvent
+import org.springframework.stereotype.Component
 
 @Component
 class StartupApplicationListener(
     queryBus: QueryBus<ApiAliveQuery>,
+    commandBus: CommandBus<Command>,
     apiAliveService: ApiAliveService
 ) :
     ApplicationListener<ContextRefreshedEvent?> {
     private val queryBus: QueryBus<ApiAliveQuery>
+    private val commandBus: CommandBus<Command>
+
     private val apiAliveService: ApiAliveService
 
 
     init {
         this.queryBus = queryBus
+        this.commandBus = commandBus
         this.apiAliveService = apiAliveService
     }
 

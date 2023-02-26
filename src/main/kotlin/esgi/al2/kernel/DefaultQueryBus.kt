@@ -1,4 +1,4 @@
-package esgi.al2.kernel;
+package esgi.al2.kernel
 
 import jakarta.validation.Validator
 
