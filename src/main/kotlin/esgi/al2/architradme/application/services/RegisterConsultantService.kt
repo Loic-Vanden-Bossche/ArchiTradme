@@ -18,13 +18,13 @@ class RegisterConsultantService(
         val consultantId: ConsultantId = registerConsultantPort.nextId()
         val consultant = Consultant(
             consultantId,
-            "firstName",
-            "lastName",
-            "email",
+            command.firstName,
+            command.lastName,
+            command.email,
             command.skills,
-            20.00,
-            listOf(),
-            "modalities",
+            command.adr,
+            command.availability,
+            command.modalities
         )
         registerConsultantPort.register(consultant)
         eventDispatcher.dispatch(ConsultantRegisteredEvent(consultant.id, consultant.email))

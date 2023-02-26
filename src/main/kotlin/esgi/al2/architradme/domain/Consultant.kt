@@ -7,6 +7,6 @@ class Consultant(
     var email: String,
     var skills: List<String>,
     var adr: Double,
-    var availability: List<String>,
-    var modalities: String
+    var availability: String?,
+    var modalities: String?
 )

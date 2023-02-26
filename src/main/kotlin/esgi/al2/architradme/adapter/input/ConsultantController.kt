@@ -21,8 +21,16 @@ class ConsultantController(
     private fun register(
         @RequestBody @Valid registerConsultantRequest: RegisterConsultantRequest
     ): RegisterConsultantResponse {
-        val accountId = commandBus?.post<String>(RegisterConsultantCommand(registerConsultantRequest.skills))
-        return RegisterConsultantResponse(accountId ?: "")
+        val accountId = commandBus.post<String>(RegisterConsultantCommand(
+            registerConsultantRequest.firstName,
+            registerConsultantRequest.lastName,
+            registerConsultantRequest.email,
+            registerConsultantRequest.skills,
+            registerConsultantRequest.adr,
+            registerConsultantRequest.availability,
+            registerConsultantRequest.modalities
+        ))
+        return RegisterConsultantResponse(accountId)
     }
 
 }
