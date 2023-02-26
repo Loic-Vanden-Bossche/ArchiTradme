@@ -14,4 +14,9 @@ class KernelConfiguration {
     fun commandBus(): CommandBus<*> {
         return BusFactory.defaultCommandBus()
     }
+
+    @Bean
+    fun eventDispatcher(): EventDispatcher<*> {
+        return DefaultEventDispatcher.create()
+    }
 }

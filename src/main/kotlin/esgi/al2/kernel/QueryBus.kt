@@ -1,4 +1,4 @@
-package esgi.al2.kernel;
+package esgi.al2.kernel
 
 interface QueryBus<Q : Query> {
     fun <R> post(query: Q): R
