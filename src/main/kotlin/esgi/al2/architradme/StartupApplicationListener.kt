@@ -1,5 +1,6 @@
 package esgi.al2.architradme
 
+import esgi.al2.architradme.adapter.input.ConsultantController
 import esgi.al2.architradme.application.port.input.ApiAliveQuery
 import esgi.al2.architradme.application.services.ApiAliveService
 import esgi.al2.kernel.*

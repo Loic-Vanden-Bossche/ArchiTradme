@@ -1,6 +1,7 @@
 package esgi.al2.architradme.adapter.input
 
 import esgi.al2.architradme.application.port.input.ApiAliveQuery
+import esgi.al2.kernel.Query
 import esgi.al2.kernel.QueryBus
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,10 +13,10 @@ import java.util.UUID
 @RequestMapping("/")
 class ApiController {
 
-    private var queryBus: QueryBus<ApiAliveQuery>? = null
+    private var queryBus: QueryBus<Query>? = null
 
     @Autowired
-    private fun ApiController(queryBus: QueryBus<ApiAliveQuery>) {
+    private fun ApiController(queryBus: QueryBus<Query>) {
         this.queryBus = queryBus
     }
 
