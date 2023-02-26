@@ -14,10 +14,6 @@ class ConsultantPersistenceAdapter(
     }
 
     override fun register(consultant: Consultant) {
-        for (skill in consultant.skills) {
-            println(skill)
-        }
-
         val consultantEntity = ConsultantEntity(
             consultant.id.value(),
             consultant.firstName,
