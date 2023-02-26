@@ -8,7 +8,7 @@ class BusFactory private constructor() {
     companion object {
 
         fun defaultQueryBus(): QueryBus<Query> {
-            return DefaultQueryBus(HashMap())
+            return DefaultQueryBus(HashMap(), UseCaseValidator.instance.validator())
         }
     }
 }
