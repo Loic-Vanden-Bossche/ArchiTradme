@@ -1,5 +1,6 @@
 package esgi.al2.architradme.adapter.output
 
+import esgi.al2.architradme.application.port.output.LoadConsultantPort
 import esgi.al2.architradme.application.port.output.RegisterConsultantPort
 import esgi.al2.architradme.application.port.output.UpdateConsultantPort
 import esgi.al2.architradme.domain.Consultant
@@ -8,7 +9,7 @@ import java.util.*
 
 class ConsultantPersistenceAdapter(
     private var consultantEntityRepository: ConsultantEntityRepository?
-) : RegisterConsultantPort, UpdateConsultantPort {
+) : RegisterConsultantPort, UpdateConsultantPort, LoadConsultantPort {
 
     override fun nextId(): ConsultantId {
         return ConsultantId.of(UUID.randomUUID())
@@ -30,7 +31,7 @@ class ConsultantPersistenceAdapter(
     }
 
     override fun update(consultant: Consultant) {
-        val consultantEntity = ConsultantEntity(
+            val consultantEntity = ConsultantEntity(
             consultant.id.value(),
             consultant.firstName,
             consultant.lastName,
@@ -42,5 +43,9 @@ class ConsultantPersistenceAdapter(
         )
 
         consultantEntityRepository?.save(consultantEntity)
+    }
+
+    override fun load(consultantId: ConsultantId): Optional<ConsultantEntity>? {
+        return consultantEntityRepository?.findById(consultantId.value())
     }
 }

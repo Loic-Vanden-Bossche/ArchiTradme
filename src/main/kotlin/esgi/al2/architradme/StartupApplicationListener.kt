@@ -4,10 +4,8 @@ import esgi.al2.architradme.application.port.input.ApiAliveQuery
 import esgi.al2.architradme.application.port.input.RegisterConsultantCommand
 import esgi.al2.architradme.application.port.input.UpdateConsultantCommand
 import esgi.al2.architradme.application.port.input.events.ConsultantRegisteredEvent
-import esgi.al2.architradme.application.services.ApiAliveService
-import esgi.al2.architradme.application.services.ConsultantRegisteredEventHandler
-import esgi.al2.architradme.application.services.RegisterConsultantService
-import esgi.al2.architradme.application.services.UpdateConsultantService
+import esgi.al2.architradme.application.port.input.events.ConsultantUpdatedEvent
+import esgi.al2.architradme.application.services.*
 import esgi.al2.kernel.*
 import org.springframework.context.ApplicationListener
 import org.springframework.context.event.ContextRefreshedEvent
@@ -22,6 +20,7 @@ class StartupApplicationListener(
     private val registerConsultantService: RegisterConsultantService,
     private val updateConsultantService: UpdateConsultantService,
     private val consultantRegisteredEventHandler: ConsultantRegisteredEventHandler,
+    private val consultantUpdatedEventHandler: ConsultantUpdatedEventHandler,
 ) : ApplicationListener<ContextRefreshedEvent> {
 
     override fun onApplicationEvent(event: ContextRefreshedEvent) {
@@ -43,6 +42,11 @@ class StartupApplicationListener(
         eventDispatcher.register(
             ConsultantRegisteredEvent::class.java as Class<Event>,
             consultantRegisteredEventHandler as EventHandler<Event>
+        )
+
+        eventDispatcher.register(
+            ConsultantUpdatedEvent::class.java as Class<Event>,
+            consultantUpdatedEventHandler as EventHandler<Event>
         )
     }
 }

@@ -4,13 +4,14 @@ import esgi.al2.architradme.application.port.input.RegisterConsultantCommand
 import esgi.al2.architradme.application.port.input.UpdateConsultantCommand
 import esgi.al2.kernel.Command
 import esgi.al2.kernel.CommandBus
+import esgi.al2.kernel.IsUUID
 import jakarta.validation.Valid
+import jakarta.validation.constraints.NotBlank
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 
 @RestController
 @RequestMapping("/consultants")
@@ -18,6 +19,8 @@ class ConsultantController(
     private val commandBus: CommandBus<Command>,
     //private val queryBus: QueryBus<Query>
 ) {
+
+    interface Update
 
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     private fun register(
@@ -35,11 +38,19 @@ class ConsultantController(
         return RegisterConsultantResponse(accountId)
     }
 
-    @PutMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @PutMapping(value = ["{consultantId}"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     private fun update(
-        @RequestBody @Valid updateConsultantRequest: UpdateConsultantRequest
+        @RequestBody @Valid updateConsultantRequest: UpdateConsultantRequest, @PathVariable consultantId: String
     ): UpdateConsultantResponse {
+
+        if (!IsUUIDValidator().isValid(consultantId)) {
+            throw ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "consultantId is not a valid UUID"
+            )
+        }
+
         val accountId = commandBus.post<String>(UpdateConsultantCommand(
+            consultantId,
             updateConsultantRequest.firstName,
             updateConsultantRequest.lastName,
             updateConsultantRequest.skills,

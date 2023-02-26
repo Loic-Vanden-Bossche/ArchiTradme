@@ -8,6 +8,6 @@ data class RegisterConsultantRequest(
     @field:NotNull val email: String,
     @field:NotNull val skills: List<String>,
     @field:NotNull val adr: Double,
-    val availability: String? = null,
-    val modalities: String? = null
+    val availability: String?,
+    val modalities: String?
 )

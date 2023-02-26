@@ -1,5 +1,6 @@
 package esgi.al2.architradme
 
+import esgi.al2.architradme.adapter.input.IsUUIDValidator
 import esgi.al2.architradme.adapter.output.ConsultantEntityRepository
 import esgi.al2.architradme.adapter.output.ConsultantPersistenceAdapter
 import esgi.al2.architradme.adapter.output.LogNotifications
@@ -23,6 +24,9 @@ class ApplicationConfiguration {
     private val eventDispatcher: EventDispatcher<Event>? = null
 
     @Bean
+    fun isUUIDValidator() = IsUUIDValidator()
+
+    @Bean
     fun apiAliveService(): ApiAliveService {
         return ApiAliveService()
     }
@@ -38,6 +42,7 @@ class ApplicationConfiguration {
     @Bean
     fun updateConsultantService(): UpdateConsultantService {
         return UpdateConsultantService(
+            persistenceAdapter(),
             persistenceAdapter(),
             eventDispatcher!!
         )

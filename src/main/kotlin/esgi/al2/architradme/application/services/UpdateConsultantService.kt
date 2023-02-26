@@ -2,32 +2,43 @@ package esgi.al2.architradme.application.services
 
 import esgi.al2.architradme.application.port.input.UpdateConsultantCommand
 import esgi.al2.architradme.application.port.input.events.ConsultantUpdatedEvent
+import esgi.al2.architradme.application.port.output.LoadConsultantPort
 import esgi.al2.architradme.application.port.output.UpdateConsultantPort
 import esgi.al2.architradme.domain.Consultant
 import esgi.al2.architradme.domain.ConsultantId
 import esgi.al2.kernel.CommandHandler
 import esgi.al2.kernel.Event
 import esgi.al2.kernel.EventDispatcher
+import java.util.*
 
 class UpdateConsultantService(
     private val updateConsultantPort: UpdateConsultantPort,
+    private val loadConsultantPort: LoadConsultantPort,
     private val eventDispatcher: EventDispatcher<in Event>,
 ) : CommandHandler<UpdateConsultantCommand, String> {
 
     override fun handle(command: UpdateConsultantCommand): String {
-        val consultantId: ConsultantId = updateConsultantPort.nextId()
+        val consultantId = ConsultantId.of(UUID.fromString(command.consultantId))
+
+        val consultantEntity = loadConsultantPort.load(consultantId)
+
+        println(consultantEntity?.isPresent)
+
+        if (!consultantEntity?.isPresent!!) throw IllegalArgumentException("Consultant not found")
+
         val consultant = Consultant(
             consultantId,
-            command.firstName,
-            command.lastName,
-            "command.email",
-            command.skills,
-            command.adr,
-            command.availability,
-            command.modalities
+            command.firstName ?: consultantEntity.get().firstName,
+            command.lastName ?: consultantEntity.get().lastName,
+            consultantEntity.get().email,
+            command.skills ?: consultantEntity.get().skills,
+            command.adr ?: consultantEntity.get().adr,
+            command.availability ?: consultantEntity.get().availability,
+            command.modalities ?: consultantEntity.get().modalities
         )
+
         updateConsultantPort.update(consultant)
-        eventDispatcher.dispatch(ConsultantUpdatedEvent(consultant.id, consultant.email))
+        eventDispatcher.dispatch(ConsultantUpdatedEvent(consultantId, "Consultant updated"))
         return consultantId.value()
     }
 }
