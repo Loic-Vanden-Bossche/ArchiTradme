@@ -6,10 +6,8 @@ import esgi.al2.architradme.application.port.input.UpdateConsultantCommand
 import esgi.al2.architradme.domain.Consultant
 import esgi.al2.kernel.*
 import jakarta.validation.Valid
-import jakarta.validation.constraints.NotBlank
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
