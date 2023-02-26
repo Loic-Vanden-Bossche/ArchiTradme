@@ -1,5 +1,6 @@
 package esgi.al2.architradme.application.services
 
+import esgi.al2.architradme.application.ConsultantApplicationException
 import esgi.al2.architradme.application.port.input.UpdateConsultantCommand
 import esgi.al2.architradme.application.port.input.events.ConsultantUpdatedEvent
 import esgi.al2.architradme.application.port.output.LoadConsultantPort
@@ -19,12 +20,9 @@ class UpdateConsultantService(
 
     override fun handle(command: UpdateConsultantCommand): String {
         val consultantId = ConsultantId.of(UUID.fromString(command.consultantId))
-
         val consultantEntity = loadConsultantPort.load(consultantId)
 
-        println(consultantEntity?.isPresent)
-
-        if (!consultantEntity?.isPresent!!) throw IllegalArgumentException("Consultant not found")
+        if (!consultantEntity?.isPresent!!) throw ConsultantApplicationException.notFound(command.consultantId)
 
         val consultant = Consultant(
             consultantId,
