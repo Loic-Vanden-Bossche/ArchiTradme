@@ -12,7 +12,7 @@ class ConsultantRegisteredEventHandler(
         notifications.notify(
             String.format(
                 "Notification of the consultant registration with id %s and email %s",
-                event.getConsultantId(),
+                event.getConsultantId().value(),
                 event.getEmail()
             )
         )

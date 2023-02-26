@@ -13,36 +13,13 @@ import org.springframework.stereotype.Component
 
 @Component
 class StartupApplicationListener(
-    queryBus: QueryBus<Query>,
-    commandBus: CommandBus<Command>,
-    eventDispatcher: EventDispatcher<Event>,
-    apiAliveService: ApiAliveService,
-    registerConsultantService: RegisterConsultantService,
-    consultantRegisteredEventHandler: ConsultantRegisteredEventHandler,
-) :
-    ApplicationListener<ContextRefreshedEvent?> {
-    private val queryBus: QueryBus<Query>
-    private val commandBus: CommandBus<Command>
-
-    private val eventDispatcher: EventDispatcher<Event>
-
-    private val apiAliveService: ApiAliveService
-    private val registerConsultantService: RegisterConsultantService
-
-    private val consultantRegisteredEventHandler: ConsultantRegisteredEventHandler
-
-
-    init {
-        this.queryBus = queryBus
-        this.commandBus = commandBus
-
-        this.eventDispatcher = eventDispatcher
-
-        this.apiAliveService = apiAliveService
-        this.registerConsultantService = registerConsultantService
-
-        this.consultantRegisteredEventHandler = consultantRegisteredEventHandler
-    }
+    private val queryBus: QueryBus<Query>,
+    private val commandBus: CommandBus<Command>,
+    private val eventDispatcher: EventDispatcher<Event>,
+    private val apiAliveService: ApiAliveService,
+    private val registerConsultantService: RegisterConsultantService,
+    private val consultantRegisteredEventHandler: ConsultantRegisteredEventHandler,
+) : ApplicationListener<ContextRefreshedEvent> {
 
     override fun onApplicationEvent(event: ContextRefreshedEvent) {
         queryBus.register(

@@ -1,3 +1,3 @@
 package esgi.al2.architradme.adapter.input
 
-class RegisterConsultantResponse(val consultantId: String)
+data class RegisterConsultantResponse(val consultantId: String)
