@@ -1,7 +1,7 @@
 package esgi.al2.architradme.application.services
 
 import esgi.al2.architradme.application.port.input.RegisterConsultantCommand
-import esgi.al2.architradme.application.port.input.events.ConsultantRegisteredEvent
+import esgi.al2.architradme.application.events.ConsultantRegisteredEvent
 import esgi.al2.architradme.application.port.output.RegisterConsultantPort
 import esgi.al2.architradme.domain.Consultant
 import esgi.al2.architradme.domain.ConsultantId

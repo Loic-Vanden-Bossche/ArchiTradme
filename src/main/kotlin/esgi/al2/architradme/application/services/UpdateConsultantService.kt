@@ -2,7 +2,7 @@ package esgi.al2.architradme.application.services
 
 import esgi.al2.architradme.application.ConsultantApplicationException
 import esgi.al2.architradme.application.port.input.UpdateConsultantCommand
-import esgi.al2.architradme.application.port.input.events.ConsultantUpdatedEvent
+import esgi.al2.architradme.application.events.ConsultantUpdatedEvent
 import esgi.al2.architradme.application.port.output.LoadConsultantPort
 import esgi.al2.architradme.application.port.output.UpdateConsultantPort
 import esgi.al2.architradme.domain.Consultant

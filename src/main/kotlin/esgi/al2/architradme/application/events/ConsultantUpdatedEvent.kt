@@ -1,4 +1,4 @@
-package esgi.al2.architradme.application.port.input.events
+package esgi.al2.architradme.application.events
 
 import esgi.al2.architradme.domain.ConsultantId
 import esgi.al2.kernel.Event

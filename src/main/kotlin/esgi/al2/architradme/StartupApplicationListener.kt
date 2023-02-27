@@ -4,8 +4,8 @@ import esgi.al2.architradme.application.port.input.ApiAliveQuery
 import esgi.al2.architradme.application.port.input.RegisterConsultantCommand
 import esgi.al2.architradme.application.port.input.SearchConsultantsQuery
 import esgi.al2.architradme.application.port.input.UpdateConsultantCommand
-import esgi.al2.architradme.application.port.input.events.ConsultantRegisteredEvent
-import esgi.al2.architradme.application.port.input.events.ConsultantUpdatedEvent
+import esgi.al2.architradme.application.events.ConsultantRegisteredEvent
+import esgi.al2.architradme.application.events.ConsultantUpdatedEvent
 import esgi.al2.architradme.application.services.*
 import esgi.al2.kernel.*
 import org.springframework.context.ApplicationListener

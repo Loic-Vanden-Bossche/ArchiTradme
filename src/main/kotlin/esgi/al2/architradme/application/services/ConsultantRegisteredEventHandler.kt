@@ -1,6 +1,6 @@
 package esgi.al2.architradme.application.services
 
-import esgi.al2.architradme.application.port.input.events.ConsultantRegisteredEvent
+import esgi.al2.architradme.application.events.ConsultantRegisteredEvent
 import esgi.al2.architradme.application.port.output.Notifications
 import esgi.al2.kernel.EventHandler
 
