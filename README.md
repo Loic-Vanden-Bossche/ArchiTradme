@@ -40,6 +40,11 @@ Une pipeline déploie automatiquement l'application sur un environnement AWS ela
 - [**ArchiTradmeFrontend**](https://www.archi-tradme.link/)
 - [**ArchiTradmeBackend**](https://api.archi-tradme.link/)
 
+## Schema de l'architecture
+
+![ArchiTradme](./schema.svg)
+
+
 ## Contributeurs
 - [**Loïc Vanden Bossche**](https://github.com/Loic-Vanden-Bossche)
 - [**Barlords**](https://github.com/Barlords)
